@@ -12,11 +12,11 @@ fn get_one_dir(line: &String, num_strs: &Vec<String>) -> u32 {
     let first_digit = usize::try_from((line.as_bytes()[first_digit_idx] as char).to_digit(10).unwrap()).unwrap();
     
     match first_indexes[first_digit] {
-        Some(val) => {first_indexes[first_digit] = Some(cmp::min(val, first_digit_idx))}
-        None => {first_indexes[first_digit] = Some(first_digit_idx)}
+        Some(val) => first_indexes[first_digit] = Some(cmp::min(val, first_digit_idx)),
+        None => first_indexes[first_digit] = Some(first_digit_idx)
     };
 
-    let min_index = first_indexes.into_iter().fold(None, |cur_idx,cur_min| {
+    let min_index = first_indexes.clone().into_iter().fold(None, |cur_idx,cur_min| {
         match cur_idx {
             Some(num) => match cur_min {
                 Some(min_num) => return Some(cmp::min(min_num, num)),
@@ -26,7 +26,9 @@ fn get_one_dir(line: &String, num_strs: &Vec<String>) -> u32 {
         };
     }).unwrap();
 
-    return u32::try_from(min_index).unwrap();
+    let first_value = first_indexes.into_iter().position(|val| val == Some(min_index)).unwrap();
+
+    return u32::try_from(first_value).unwrap();
 }
 
 fn get_line_num(line: &str, fwd_digit_strs: &Vec<String>, rev_digit_strs: &Vec<String>) -> u32 {
