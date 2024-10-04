@@ -35,7 +35,6 @@ fn get_line_num(line: &str, fwd_digit_strs: &Vec<String>, rev_digit_strs: &Vec<S
     let reversed_line = rev_word(line.to_string());
     let first_digit = get_one_dir(&line.to_string(), fwd_digit_strs);
     let last_digit = get_one_dir(&reversed_line, rev_digit_strs);
-    println!("line: {line} | rev: {reversed_line} | first: {first_digit} | last: {last_digit}");
     return 10 * first_digit + last_digit;
     
 }
