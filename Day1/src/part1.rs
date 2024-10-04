@@ -4,7 +4,7 @@ fn get_line_num(line: &str) -> u32 {
     return 10 * first_digit + last_digit;
 }
 
-pub fn get_result(file: String) -> String {
+pub fn get_result(file: &String) -> String {
     let sum = file.lines().fold(0, |acc: u32, val: &str| acc + get_line_num(val));
     return sum.to_string();
 }
